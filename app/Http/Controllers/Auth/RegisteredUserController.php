@@ -19,8 +19,12 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): Response
+    public function create(): Response|\Illuminate\Http\RedirectResponse
     {
+        if (User::exists()) {
+            return redirect()->route('login')->with('status', 'Registro desativado. Um usuario ja esta registrado no sistema.');
+        }
+
         return Inertia::render('Auth/Register');
     }
 
@@ -31,6 +35,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        if (User::exists()) {
+            throw ValidationException::withMessages([
+                'email' => ['O registro foi desativado. Um usuario ja esta registrado no sistema.'],
+            ]);
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
