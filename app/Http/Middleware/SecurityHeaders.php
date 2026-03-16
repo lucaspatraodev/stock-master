@@ -16,16 +16,30 @@ class SecurityHeaders
         /** @var Response $response */
         $response = $next($request);
 
+        $isLocal = app()->environment('local');
+
+        $styleSrc = ["'self'", "'unsafe-inline'", 'https://fonts.bunny.net'];
+        $fontSrc = ["'self'", 'data:', 'https://fonts.bunny.net'];
+        $scriptSrc = ["'self'"];
+        $connectSrc = ["'self'", 'ws:', 'wss:'];
+
+        if ($isLocal) {
+            $scriptSrc[] = "'unsafe-inline'";
+            $scriptSrc[] = 'http://localhost:5173';
+            $connectSrc[] = 'http://localhost:5173';
+            $connectSrc[] = 'ws://localhost:5173';
+        }
+
         $csp = implode('; ', [
             "default-src 'self'",
             "base-uri 'self'",
             "object-src 'none'",
             "frame-ancestors 'none'",
             "img-src 'self' data: blob:",
-            "font-src 'self' data:",
-            "style-src 'self' 'unsafe-inline'",
-            "script-src 'self'",
-            "connect-src 'self' ws: wss:",
+            'font-src ' . implode(' ', $fontSrc),
+            'style-src ' . implode(' ', $styleSrc),
+            'script-src ' . implode(' ', $scriptSrc),
+            'connect-src ' . implode(' ', $connectSrc),
         ]);
 
         $response->headers->set('Content-Security-Policy', $csp);
