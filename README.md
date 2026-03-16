@@ -25,7 +25,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
 
 3. **Subir os containers:**
    ```bash
-   docker compose up -d
+   docker compose up -d --build
    ```
 
 4. **Instalar dependências (via Docker):**
