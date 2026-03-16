@@ -14,7 +14,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
 
 1. **Clonar o repositório:**
    ```bash
-   git clone [https://github.com/lucaspatraodev/stock-master.git](https://github.com/lucaspatraodev/stock-master.git)
+   git clone https://github.com/lucaspatraodev/stock-master.git
    cd stock-master
    ```
 
@@ -25,7 +25,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
 
 3. **Instalar dependências (via Docker):**
    ```bash
-  docker compose exec app composer  install
+  docker compose exec app composer install
    ```
 
 4. **Subir os containers:**
@@ -73,9 +73,10 @@ docker compose exec app php artisan scribe:generate
 Acesse em:
 - http://localhost/docs
 
-Para habilitar o "Try It Out" com token:
-- Preencha `SCRIBE_AUTH_KEY` no `.env` com `Bearer SEU_TOKEN`
-- O token pode ser obtido no login (endpoint `POST /api/login`).
+Para habilitar o "Try It Out"/testar direto do navegador com token:
+- O token pode ser obtido no login (endpoint `POST /api/login`);
+- Preencha o campo Authorization com Bearer Bearer {SEU_TOKEN};
+- Faça as requisições!
 
 ## 🧭 Arquitetura (Resumo)
 - **Backend:** Laravel 12 com Sanctum para autenticação via token.
@@ -94,10 +95,10 @@ php artisan tinker --no-pager
 
 Dentro do Tinker:
 ```php
-// Ultimos 20 logs
+// Consultar últimos 20 logs
 \App\Models\ProductLog::latest()->take(20)->get();
 
-// Logs de um produto especifico
+// Consultar logs de um produto especifico
 \App\Models\ProductLog::where('product_id', 1)->latest()->get();
 ```
 
