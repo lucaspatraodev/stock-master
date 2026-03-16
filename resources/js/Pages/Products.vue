@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 
 const loading = ref(true);
 const products = ref([]);
@@ -377,6 +377,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Head title="Produtos" />
   <div class="min-h-screen bg-[#131314] py-10 px-4">
     <div class="max-w-6xl mx-auto space-y-6">
         <div class="flex items-start justify-between gap-4 flex-wrap">

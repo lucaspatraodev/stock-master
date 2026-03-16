@@ -1,4 +1,5 @@
 <template>
+  <Head title="Acesso" />
   <div class="min-h-screen bg-[#131314] flex items-center justify-center px-4">
     <div class="bg-zinc-950 p-8 rounded-2xl shadow-[0_25px_60px_-40px_rgba(0,0,0,0.8)] w-full max-w-md border border-zinc-900">
       <!-- Carregando -->
@@ -172,7 +173,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { router, usePage } from '@inertiajs/vue3';
+import { Head, router, usePage } from '@inertiajs/vue3';
 
 const page = usePage();
 const status = computed(() => page.props?.status || null);
