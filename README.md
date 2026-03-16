@@ -23,34 +23,39 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
    cp .env.example .env
    ```
 
-3. **Subir os containers:**
+3. **Ajustar permissoes de pastas:**
+   ```bash
+   sudo chmod -R 777 storage bootstrap/cache
+   ```
+
+4. **Subir os containers:**
    ```bash
    docker compose up -d --build
    ```
 
-4. **Instalar dependências (via Docker):**
+5. **Instalar dependências (via Docker):**
    ```bash
    docker compose exec app composer install
    ```
 
-5. **Gerar chave da aplicação e rodar migrations:**
+6. **Gerar chave da aplicação e rodar migrations:**
    ```bash
    docker compose exec app php artisan key:generate
    docker compose exec app php artisan migrate
    ```
 
-6. **Criar link para arquivos públicos (uploads):**
+7. **Criar link para arquivos públicos (uploads):**
    ```bash
    docker compose exec app php artisan storage:link
    ```
 
-7. **Compilar o Frontend:**
+8. **Compilar o Frontend:**
    ```bash
    docker compose exec app npm install
    docker compose exec app npm run build
    ```
 
-8. **Acessar a aplicação:**
+9. **Acessar a aplicação:**
 Abra no navegador: http://localhost
 
 ## ✅ Testes
