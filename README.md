@@ -78,7 +78,7 @@ Para habilitar o "Try It Out"/testar direto do navegador com token:
 - Preencha o campo Authorization com Bearer Bearer {SEU_TOKEN};
 - Faça as requisições!
 
-## 🧭 Arquitetura (Resumo)
+## 🧭 Arquitetura
 - **Backend:** Laravel 12 com Sanctum para autenticação via token.
 - **Frontend:** Vue 3 + Inertia.js + Tailwind CSS.
 - **Banco de Dados:** MySQL.
