@@ -23,20 +23,20 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
    cp .env.example .env
    ```
 
-3. **Instalar dependências (via Docker):**
-   ```bash
-   docker compose exec app composer install
-   ```
-
-4. **Subir os containers:**
+3. **Subir os containers:**
    ```bash
    docker compose up -d
+   ```
+
+4. **Instalar dependências (via Docker):**
+   ```bash
+   docker compose exec app composer install
    ```
 
 5. **Gerar chave da aplicação e rodar migrations:**
    ```bash
    docker compose exec app php artisan key:generate
-   docker compose exec app php artisan migrate --seed
+   docker compose exec app php artisan migrate
    ```
 
 6. **Criar link para arquivos públicos (uploads):**
