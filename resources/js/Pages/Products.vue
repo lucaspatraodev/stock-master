@@ -377,36 +377,37 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100 py-10 px-4">
-    <div class="max-w-5xl mx-auto space-y-6">
+  <div class="min-h-screen bg-[#131314] py-10 px-4">
+    <div class="max-w-6xl mx-auto space-y-6">
         <div class="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h1 class="text-3xl font-bold text-gray-900">Produtos</h1>
-            <p class="text-gray-600 mt-1">Gerencie o cadastro e o status dos produtos.</p>
+            <p class="text-lg font-bold tracking-[0.2em] text-white">STOCKMASTER</p>
+            <h1 class="text-3xl font-semibold text-white mt-2">Produtos</h1>
+            <p class="text-gray-400 mt-1">Gerencie o cadastro e o status dos produtos.</p>
           </div>
         <div class="flex items-center gap-2">
           <div v-if="isAdminUser()" class="relative">
             <button
               type="button"
-              class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition"
+              class="px-4 py-2 border border-zinc-700 text-gray-200 rounded-lg font-medium hover:bg-zinc-900 transition"
               @click="showUserMenu = !showUserMenu"
             >
               Conta
             </button>
             <div
               v-if="showUserMenu"
-              class="absolute right-0 mt-2 w-48 rounded-lg border border-gray-200 bg-white shadow-lg z-10"
+              class="absolute right-0 mt-2 w-52 rounded-lg border border-zinc-800 bg-zinc-950 shadow-xl z-10"
             >
               <Link
                 :href="route('users')"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                class="block px-4 py-2 text-sm text-gray-200 hover:bg-zinc-900"
                 @click="showUserMenu = false"
               >
                 Usuarios
               </Link>
               <button
                 type="button"
-                class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                class="block w-full px-4 py-2 text-left text-sm text-gray-200 hover:bg-zinc-900"
                 @click="logout"
               >
                 Sair
@@ -416,14 +417,14 @@ onMounted(async () => {
           <button
             v-else
             type="button"
-            class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition"
+            class="px-4 py-2 border border-zinc-700 text-gray-200 rounded-lg font-medium hover:bg-zinc-900 transition"
             @click="logout"
           >
             Sair
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+            class="px-4 py-2 bg-lime-500 text-black rounded-lg font-semibold hover:bg-lime-400 transition"
             @click="showCreate = !showCreate"
           >
             {{ showCreate ? 'Ocultar cadastro' : 'Cadastrar produto' }}
@@ -433,7 +434,7 @@ onMounted(async () => {
 
       <div
         v-if="createErrorMessages.length"
-        class="p-4 rounded-lg bg-red-100 border border-red-300 text-red-700"
+        class="p-4 rounded-lg bg-red-500/10 border border-red-500/40 text-red-200"
       >
         <ul class="list-disc pl-5 space-y-1">
           <li v-for="(message, idx) in createErrorMessages" :key="`err-create-${idx}`" class="text-sm">
@@ -441,63 +442,63 @@ onMounted(async () => {
           </li>
         </ul>
       </div>
-      <div v-if="success" class="p-4 rounded-lg bg-green-100 border border-green-300 text-green-700">
+      <div v-if="success" class="p-4 rounded-lg bg-lime-500/10 border border-lime-500/40 text-lime-200">
         {{ success }}
       </div>
 
-      <div v-if="showCreate" class="bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Cadastrar</h2>
-        <form class="grid md:grid-cols-3 gap-4" @submit.prevent="handleCreate">
+      <div v-if="showCreate" class="bg-zinc-950 rounded-2xl border border-zinc-900 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.8)] p-6">
+        <h2 class="text-xl font-semibold text-white mb-4">Cadastrar</h2>
+        <form class="grid md:grid-cols-2 gap-4" @submit.prevent="handleCreate">
           <div class="md:col-span-1">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label>
+              <label class="block text-sm font-medium text-gray-300 mb-1">Titulo</label>
               <input
                 v-model="createForm.title"
                 type="text"
                 required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
                 placeholder="Titulo do produto"
               />
             </div>
             <div class="md:col-span-1">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Descricao (HTML)</label>
-              <p class="text-xs text-gray-500 mb-1">Permite apenas: &lt;p&gt;, &lt;br&gt;, &lt;b&gt;, &lt;strong&gt;.</p>
-              <textarea
+              <label class="block text-sm font-medium text-gray-300 mb-1">Descricao</label>
+              <input
                 v-model="createForm.description"
-                rows="2"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              ></textarea>
+                type="text"
+                class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+                placeholder="Descricao do produto"
+              />
             </div>
             <div class="md:col-span-1">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Preco de venda</label>
+              <label class="block text-sm font-medium text-gray-300 mb-1">Preco de venda</label>
               <input
                 v-model.number="createForm.sale_price"
                 type="number"
                 min="0"
                 step="0.01"
                 required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
                 placeholder="0.00"
               />
             </div>
             <div class="md:col-span-1">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Custo</label>
+              <label class="block text-sm font-medium text-gray-300 mb-1">Custo</label>
               <input
                 v-model.number="createForm.cost"
                 type="number"
                 min="0"
                 step="0.01"
                 required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
                 placeholder="0.00"
               />
             </div>
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Imagens (jpg/png)</label>
+              <label class="block text-sm font-medium text-gray-300 mb-1">Imagens (jpg/png)</label>
               <input
                 type="file"
                 multiple
                 accept="image/png,image/jpeg"
-                class="w-full text-sm text-gray-600"
+                class="w-full text-sm text-gray-300 file:mr-4 file:rounded-lg file:border-0 file:bg-lime-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-black hover:file:bg-lime-400"
                 ref="createFileInput"
                 @change="onCreateFilesChange"
                 @input="onCreateFilesChange"
@@ -508,15 +509,15 @@ onMounted(async () => {
                   :key="`create-preview-${idx}`"
                   :src="url"
                   alt=""
-                  class="w-14 h-14 rounded-lg object-cover border border-gray-700"
+                  class="w-14 h-14 rounded-lg object-cover border border-zinc-700"
                 />
               </div>
             </div>
-            <div class="md:col-span-3 flex justify-end">
+            <div class="md:col-span-2 flex justify-end">
               <button
               type="submit"
               :disabled="createLoading"
-              class="px-5 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:bg-gray-400 transition"
+              class="px-5 py-2 bg-lime-500 text-black rounded-lg font-semibold hover:bg-lime-400 disabled:bg-zinc-700 transition"
             >
               {{ createLoading ? 'Salvando...' : 'Cadastrar' }}
             </button>
@@ -526,7 +527,7 @@ onMounted(async () => {
 
       <div
         v-if="editErrorMessages.length"
-        class="p-4 rounded-lg bg-red-100 border border-red-300 text-red-700"
+        class="p-4 rounded-lg bg-red-500/10 border border-red-500/40 text-red-200"
       >
         <ul class="list-disc pl-5 space-y-1">
           <li v-for="(message, idx) in editErrorMessages" :key="`err-edit-${idx}`" class="text-sm">
@@ -535,16 +536,16 @@ onMounted(async () => {
         </ul>
       </div>
 
-      <div class="bg-white rounded-xl shadow-md">
-        <div class="p-6 border-b border-gray-200">
-          <h2 class="text-xl font-semibold text-gray-800">Lista de produtos</h2>
-          <p class="text-sm text-gray-500 mt-1">Edite ou inative itens conforme necessario.</p>
+      <div class="bg-zinc-950 rounded-2xl border border-zinc-900 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.8)]">
+        <div class="p-6 border-b border-zinc-900">
+          <h2 class="text-xl font-semibold text-white">Lista de produtos</h2>
+          <p class="text-sm text-gray-400 mt-1">Edite ou inative itens conforme necessario.</p>
         </div>
 
-        <div v-if="loading" class="p-6 text-gray-500">Carregando produtos...</div>
-        <div v-else-if="products.length === 0" class="p-6 text-gray-500">Nenhum produto cadastrado.</div>
+        <div v-if="loading" class="p-6 text-gray-400">Carregando produtos...</div>
+        <div v-else-if="products.length === 0" class="p-6 text-gray-400">Nenhum produto cadastrado.</div>
 
-        <div v-else class="divide-y divide-gray-200">
+        <div v-else class="divide-y divide-zinc-900">
           <div
             v-for="product in products"
             :key="product.id"
@@ -552,47 +553,47 @@ onMounted(async () => {
           >
             <div class="flex-1">
               <div class="flex items-center gap-3">
-                <h3 class="text-lg font-semibold text-gray-900">{{ product.title }}</h3>
+                <h3 class="text-lg font-semibold text-white">{{ product.title }}</h3>
                 <span
                   class="text-xs font-semibold px-2 py-1 rounded-full"
-                  :class="product.is_active ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600'"
+                  :class="product.is_active ? 'bg-lime-500/20 text-lime-200' : 'bg-zinc-800 text-gray-400'"
                 >
                   {{ product.is_active ? 'Ativo' : 'Inativo' }}
                 </span>
               </div>
               <div
-                class="text-sm text-gray-600 mt-1 prose prose-sm max-w-none"
+                class="text-sm text-gray-400 mt-1 prose prose-sm max-w-none"
                 v-html="product.description || 'Sem descricao'"
               ></div>
             </div>
-            <div class="flex items-center gap-6">
+            <div v-if="editingId !== product.id" class="flex items-center gap-6">
               <div class="flex items-center gap-2">
                 <img
                   v-for="(url, idx) in (product.image_urls || []).slice(0, 3)"
                   :key="`${product.id}-img-${idx}`"
                   :src="url"
                   alt=""
-                  class="w-12 h-12 rounded-lg object-cover border border-gray-200"
+                  class="w-12 h-12 rounded-lg object-cover border border-zinc-700"
                 />
                 <span v-if="(product.image_urls || []).length === 0" class="text-xs text-gray-400">
                   Sem imagens
                 </span>
               </div>
               <div class="text-right">
-                <p class="text-lg font-semibold text-gray-800">{{ formatPrice(product.sale_price) }}</p>
+                <p class="text-lg font-semibold text-white">{{ formatPrice(product.sale_price) }}</p>
                 <p class="text-xs text-gray-400">Custo: {{ formatPrice(product.cost) }}</p>
               </div>
               <div class="flex gap-2">
                 <button
                   type="button"
-                  class="px-3 py-2 text-sm font-medium rounded-lg border border-blue-300 text-blue-700 hover:bg-blue-50"
+                  class="px-3 py-2 text-sm font-medium rounded-lg border border-lime-500/40 text-lime-200 hover:bg-lime-500/10"
                   @click="startEdit(product)"
                 >
                   Editar
                 </button>
                 <button
                   type="button"
-                  class="px-3 py-2 text-sm font-medium rounded-lg border border-red-300 text-red-700 hover:bg-red-50 disabled:opacity-50"
+                  class="px-3 py-2 text-sm font-medium rounded-lg border border-red-500/40 text-red-200 hover:bg-red-500/10 disabled:opacity-50"
                   :disabled="!product.is_active"
                   @click="handleInactivate(product.id)"
                 >
@@ -601,56 +602,56 @@ onMounted(async () => {
               </div>
             </div>
 
-            <div v-if="editingId === product.id" class="w-full bg-gray-50 rounded-lg p-4">
-              <h4 class="text-sm font-semibold text-gray-700 mb-3">Editar produto</h4>
-              <form class="grid md:grid-cols-3 gap-4" @submit.prevent="handleUpdate(product.id)">
+            <div v-if="editingId === product.id" class="w-full bg-zinc-900/60 rounded-lg p-4 border border-zinc-800">
+              <h4 class="text-sm font-semibold text-gray-200 mb-3">Editar produto</h4>
+              <form class="grid md:grid-cols-2 gap-4" @submit.prevent="handleUpdate(product.id)">
                 <div class="md:col-span-1">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Titulo</label>
                   <input
                     v-model="editForm.title"
                     type="text"
                     required
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
                   />
                 </div>
                 <div class="md:col-span-1">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Descricao (HTML)</label>
-                  <p class="text-xs text-gray-500 mb-1">Permite apenas: &lt;p&gt;, &lt;br&gt;, &lt;b&gt;, &lt;strong&gt;.</p>
-                  <textarea
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Descricao</label>
+                  <input
                     v-model="editForm.description"
-                    rows="2"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  ></textarea>
+                    type="text"
+                    class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
+                    placeholder="Descricao do produto"
+                  />
                 </div>
                 <div class="md:col-span-1">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Preco de venda</label>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Preco de venda</label>
                   <input
                     v-model.number="editForm.sale_price"
                     type="number"
                     min="0"
                     step="0.01"
                     required
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
                   />
                 </div>
                 <div class="md:col-span-1">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Custo</label>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Custo</label>
                   <input
                     v-model.number="editForm.cost"
                     type="number"
                     min="0"
                     step="0.01"
                     required
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    class="w-full px-3 py-2 border border-zinc-800 bg-zinc-900 rounded-lg text-gray-100 focus:ring-2 focus:ring-lime-500 focus:border-lime-500"
                   />
                 </div>
                 <div class="md:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Novas imagens (jpg/png)</label>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Novas imagens (jpg/png)</label>
                   <input
                     type="file"
                     multiple
                     accept="image/png,image/jpeg"
-                    class="w-full text-sm text-gray-600"
+                    class="w-full text-sm text-gray-300 file:mr-4 file:rounded-lg file:border-0 file:bg-lime-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-black hover:file:bg-lime-400"
                     ref="editFileInput"
                     @change="onEditFilesChange"
                     @input="onEditFilesChange"
@@ -661,7 +662,7 @@ onMounted(async () => {
                       :key="`edit-preview-${idx}`"
                       :src="url"
                       alt=""
-                      class="w-14 h-14 rounded-lg object-cover border border-gray-700"
+                      class="w-14 h-14 rounded-lg object-cover border border-zinc-700"
                     />
                   </div>
                   <div v-if="editImageOrder.length" class="mt-3">
@@ -681,11 +682,11 @@ onMounted(async () => {
                         <img
                           :src="image.url"
                           alt=""
-                          class="w-14 h-14 rounded-lg object-cover border border-gray-700"
+                          class="w-14 h-14 rounded-lg object-cover border border-zinc-700"
                         />
                         <button
                           type="button"
-                          class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-600 text-white text-xs opacity-0 group-hover:opacity-100 transition"
+                          class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-500 text-white text-xs opacity-0 group-hover:opacity-100 transition"
                           @click="handleDeleteImage(product.id, image.id)"
                           title="Remover"
                         >
@@ -695,10 +696,10 @@ onMounted(async () => {
                     </div>
                   </div>
                 </div>
-                <div class="md:col-span-3 flex justify-end gap-2">
+                <div class="md:col-span-2 flex justify-end gap-2">
                   <button
                     type="button"
-                    class="px-4 py-2 text-sm font-medium rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100"
+                    class="px-4 py-2 text-sm font-medium rounded-lg border border-zinc-700 text-gray-200 hover:bg-zinc-900"
                     @click="cancelEdit"
                   >
                     Cancelar
@@ -706,7 +707,7 @@ onMounted(async () => {
                   <button
                     type="submit"
                     :disabled="editLoading"
-                    class="px-4 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400"
+                    class="px-4 py-2 text-sm font-semibold rounded-lg bg-lime-500 text-black hover:bg-lime-400 disabled:bg-zinc-700"
                   >
                     {{ editLoading ? 'Salvando...' : 'Salvar' }}
                   </button>

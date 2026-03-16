@@ -23,7 +23,7 @@ defineProps({
     <AuthenticatedLayout>
         <template #header>
             <h2
-                class="text-xl font-semibold leading-tight text-gray-900"
+                class="text-xl font-semibold leading-tight text-white"
             >
                 Perfil
             </h2>
@@ -34,20 +34,20 @@ defineProps({
                 <div v-if="status || passwordStatus" class="space-y-3">
                     <div
                         v-if="status"
-                        class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700"
+                        class="rounded-lg border border-lime-500/40 bg-lime-500/10 px-4 py-3 text-sm text-lime-200"
                     >
                         {{ status }}
                     </div>
                     <div
                         v-if="passwordStatus"
-                        class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700"
+                        class="rounded-lg border border-lime-500/40 bg-lime-500/10 px-4 py-3 text-sm text-lime-200"
                     >
                         {{ passwordStatus }}
                     </div>
                 </div>
 
                 <div
-                    class="bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:rounded-xl"
+                    class="bg-zinc-950 p-6 border border-zinc-900 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.8)] sm:rounded-2xl"
                 >
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
@@ -57,7 +57,7 @@ defineProps({
                 </div>
 
                 <div
-                    class="bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:rounded-xl"
+                    class="bg-zinc-950 p-6 border border-zinc-900 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.8)] sm:rounded-2xl"
                 >
                     <UpdatePasswordForm class="max-w-2xl" />
                 </div>
