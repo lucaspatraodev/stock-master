@@ -18,7 +18,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
    cd stock-master
    ```
 
-2. **Configurar o Ambiente:**
+2. **Configurar o Ambiente (.env):**
    ```bash
    cp .env.example .env
    ```
@@ -44,20 +44,78 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
    ./vendor/bin/sail artisan migrate --seed
    ```
 
-6. **Compilar o Frontend:**
+6. **Criar link para arquivos públicos (uploads):**
+   ```bash
+   ./vendor/bin/sail artisan storage:link
+   ```
+
+7. **Compilar o Frontend:**
    ```bash
    ./vendor/bin/sail npm install
    ./vendor/bin/sail npm run build
    ```
 
-7. **Acessar a aplicação:**
+8. **Acessar a aplicação:**
 Abra no navegador: http://localhost
 
-## 🔑 Acesso Padrão:
-O sistema já conta com um usuário padrão criado via Seeder:
+## ✅ Testes de Feature
+Para rodar os testes (Sail/Docker):
+```bash
+./vendor/bin/sail artisan test
+```
 
-Email: admin@admin.com  
-Password: password
+Para rodar apenas alguns testes:
+```bash
+./vendor/bin/sail artisan test --filter=ProductApiTest
+./vendor/bin/sail artisan test --filter=AuthApiTest
+```
+
+## 📄 Documentacao da API (Scribe)
+Gerar a documentacao:
+```bash
+./vendor/bin/sail artisan scribe:generate
+```
+
+Acesse em:
+- http://localhost/docs
+
+Para habilitar o "Try It Out" com token:
+- Preencha `SCRIBE_AUTH_KEY` no `.env` com `Bearer SEU_TOKEN`
+
+## 📘 Manual do Usuario
+### 1) Primeiro acesso
+- Ao abrir a aplicacao, se nao houver usuarios cadastrados, o sistema libera o cadastro.
+- Crie o primeiro usuario. Depois disso, novos cadastros ficam bloqueados.
+
+### 2) Login
+- Para logar, sempre utilize seu email e senha.
+
+### 3) Tela de Produtos
+Depois do login, voce vera a lista de produtos e poderá:
+- **Cadastrar** um produto
+- **Editar** um produto
+- **Inativar** um produto
+
+### 4) Cadastro de Produto
+Campos obrigatorios:
+- **Titulo**
+- **Descricao** (HTML permitido apenas: `<p>`, `<br>`, `<b>`, `<strong>`)
+- **Preco de venda**
+- **Custo**
+- **Imagens** (jpg/png, multiplas)
+
+Regras de negocio:
+- O **preco de venda** deve ser no minimo **10% maior** que o custo.
+- Imagens aceitas: **jpg** e **png**.
+
+### 5) Edicao de Produto
+- Atualize qualquer campo.
+- Adicione novas imagens.
+- Remova imagens existentes.
+- Reordene imagens arrastando e soltando.
+
+### 6) Inativar Produto
+- Um produto inativado nao aparece como ativo e fica bloqueado para novas operacoes de venda.
 
 ## 👨‍💻 Autor
 Desenvolvido por Lucas Patrão
