@@ -77,6 +77,15 @@ Para habilitar o "Try It Out" com token:
 - Preencha `SCRIBE_AUTH_KEY` no `.env` com `Bearer SEU_TOKEN`
 - O token pode ser obtido no login (endpoint `POST /api/login`).
 
+## 🧭 Arquitetura (Resumo)
+- **Backend:** Laravel 12 com Sanctum para autenticação via token.
+- **Frontend:** Vue 3 + Inertia.js + Tailwind CSS.
+- **Banco de Dados:** MySQL.
+- **API:** endpoints REST em `/api/*`, documentados via Scribe em `/docs`.
+- **Uploads:** imagens armazenadas em `storage/app/public` e servidas via `public/storage` (`storage:link`).
+- **Logs:** `ProductObserver` registra criação e atualização em `product_logs`.
+- **Segurança:** validações no servidor (margem de 10%, HTML permitido, tipos de imagem), autenticação em rotas protegidas.
+
 ## 📜 Logs de Produto
 Para consultar os logs via Tinker:
 ```bash
