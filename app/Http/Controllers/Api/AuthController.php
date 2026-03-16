@@ -11,7 +11,12 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     /**
-     * Verificação - usuário registrado ou não (para controle de registro único)
+     * @group Auth
+     * @groupDescription Endpoints de autenticacao (login, registro inicial e logout).
+     *
+     * Verifica se o registro inicial ainda esta liberado.
+     *
+     * @unauthenticated
      */
     public function canRegister()
     {
@@ -24,7 +29,11 @@ class AuthController extends Controller
     }
 
     /**
-     * Registro de novo usuário (apenas se nenhum usuário existir)
+     * @group Auth
+     *
+     * Cria o primeiro usuario do sistema.
+     *
+     * @unauthenticated
      */
     public function register(Request $request)
     {
@@ -56,7 +65,11 @@ class AuthController extends Controller
     }
 
     /**
-     * Login do usuário e retorna token Sanctum
+     * @group Auth
+     *
+     * Login e retorno do token Bearer.
+     *
+     * @unauthenticated
      */
     public function login(Request $request)
     {
@@ -80,7 +93,11 @@ class AuthController extends Controller
     }
 
     /**
-     * Retorna usuário autenticado
+     * @group Auth
+     *
+     * Retorna o usuario autenticado.
+     *
+     * @authenticated
      */
     public function user(Request $request)
     {
@@ -88,7 +105,11 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout do usuário (revoke token)
+     * @group Auth
+     *
+     * Invalida o token atual.
+     *
+     * @authenticated
      */
     public function logout(Request $request)
     {
