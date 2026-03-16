@@ -5,7 +5,7 @@ Sistema de cadastro e gerenciamento de produtos.
 - **Backend:** Laravel 12 (PHP 8.3)
 - **Frontend:** Vue 3 com Inertia.js e Tailwind CSS
 - **Autenticação:** Laravel Breeze
-- **Ambiente:** Docker (Laravel Sail)
+- **Ambiente:** Docker (docker-compose)
 - **Banco de Dados:** MySQL
 
 
@@ -25,62 +25,72 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
 
 3. **Instalar dependências (via Docker):**
    ```bash
-   docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v "$(pwd):/var/www/html" \
-    -w /var/www/html \
-    laravelsail/php83-composer:latest \
-    composer install --ignore-platform-reqs
+  docker compose exec app composer  install
    ```
 
 4. **Subir os containers:**
    ```bash
-   ./vendor/bin/sail up -d
+   docker compose up -d
    ```
 
 5. **Gerar chave da aplicação e rodar migrations:**
    ```bash
-   ./vendor/bin/sail artisan key:generate
-   ./vendor/bin/sail artisan migrate --seed
+   docker compose exec app php artisan key:generate
+   docker compose exec app php artisan migrate --seed
    ```
 
 6. **Criar link para arquivos públicos (uploads):**
    ```bash
-   ./vendor/bin/sail artisan storage:link
+   docker compose exec app php artisan storage:link
    ```
 
 7. **Compilar o Frontend:**
    ```bash
-   ./vendor/bin/sail npm install
-   ./vendor/bin/sail npm run build
+   docker compose exec app npm install
+   docker compose exec app npm run build
    ```
 
 8. **Acessar a aplicação:**
 Abra no navegador: http://localhost
 
-## ✅ Testes de Feature
-Para rodar os testes (Sail/Docker):
+## ✅ Testes
+### Feature
+Para rodar os testes de Feature:
 ```bash
-./vendor/bin/sail artisan test
+docker compose exec app php artisan test --testsuite=Feature
 ```
-
-Para rodar apenas alguns testes:
+### Unitários
+Para rodar apenas os testes unitarios:
 ```bash
-./vendor/bin/sail artisan test --filter=ProductApiTest
-./vendor/bin/sail artisan test --filter=AuthApiTest
+docker compose exec app php artisan test --testsuite=Unit
 ```
 
 ## 📄 Documentacao da API (Scribe)
 Gerar a documentacao:
 ```bash
-./vendor/bin/sail artisan scribe:generate
+docker compose exec app php artisan scribe:generate
 ```
-
 Acesse em:
 - http://localhost/docs
 
 Para habilitar o "Try It Out" com token:
 - Preencha `SCRIBE_AUTH_KEY` no `.env` com `Bearer SEU_TOKEN`
+- O token pode ser obtido no login (endpoint `POST /api/login`).
+
+## 📜 Logs de Produto
+Para consultar os logs via Tinker:
+```bash
+php artisan tinker --no-pager
+```
+
+Dentro do Tinker:
+```php
+// Ultimos 20 logs
+\App\Models\ProductLog::latest()->take(20)->get();
+
+// Logs de um produto especifico
+\App\Models\ProductLog::where('product_id', 1)->latest()->get();
+```
 
 ## 📘 Manual do Usuario
 ### 1) Primeiro acesso
