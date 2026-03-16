@@ -25,7 +25,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina local:
 
 3. **Instalar dependências (via Docker):**
    ```bash
-  docker compose exec app composer install
+   docker compose exec app composer install
    ```
 
 4. **Subir os containers:**
