@@ -19,6 +19,9 @@ return [
     // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
     'intro_text' => <<<'INTRO'
             API para autenticacao e gerenciamento de produtos do StockMaster.
+
+            Para endpoints protegidos, envie o header:
+            `Authorization: Bearer SEU_TOKEN`
         INTRO,
 
     // The base URL displayed in the docs.
